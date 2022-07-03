@@ -1,14 +1,17 @@
-import pandas as pd
-
 inputNum = int(input())
 
-df_buf = []
+df = []
 for i in range(inputNum):
-    l = [int(x) for x in list(str(input()))]
-    print(l, df_buf)
-    df_buf.append(l)
-df = pd.DataFrame(df_buf)
+    l = [x for x in list(str(input()))]
+    df.append(l)
 
-print(df)
-
-print(df.max().index)
+ans=0
+for i in range(inputNum):
+  for j in range(inputNum):
+    for dx in [-1,0,1]:
+      for dy in [-1,0,1]:
+        if dx==0 and dy==0:
+          continue
+        a=int("".join([df[(i+dx*r)%inputNum][(j+dy*r)%inputNum] for r in range(inputNum)]))
+        ans=max(a,ans)
+print(ans)
